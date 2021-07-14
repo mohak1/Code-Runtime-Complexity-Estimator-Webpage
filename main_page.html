@@ -16,70 +16,68 @@
             html {
                 scroll-behavior: smooth;
             }
-
         </style>
     </head>
+    
     <body>
+        <!-- for plotting the graphs -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-        
+        <!-- the javascript file for this page -->
         <script defer src="main_page_js.js"></script>
 
-    <div id="contents">
-        <!-- Add links to the navbar-->
-        <h3>
-            <div class="navbar">
-                <a id="Home" href="#">Home</a> |
-                <a id="About" href="#">About</a> |
-                <a id="Help" href="#">Help</a> |
-                <a id="Contact Developer" href="#">Contact Developer</a>
-            </div>
-        </h3>
-            
-        <h1>Welcome to Code Runtime Complexity Estimator</h1>
-        <h3>This is what it does and what you can expect:</h3>
-        <p>
-            //write about how code complexity is dependent on the test cases.<br>
-            //write what this website does.<br>
-            //have an example code in the "your code here" block and some sample
-            test cases in the "test cases" section<br>
-            //mention that this is a data driven approach (as opposed to
-            analytical) hence the estimated complexity will be closer to
-            the actual complexity if enough data is provided and
-            the cases are well spread.<br>
-            //if all the test cases are of worst case scenario then the resuls
-            will represent the worst case, else if would at best be an average
-            case estimate.
-        </p>
-        <form>
-        <!-- Add the trial code button -->
-        <h4>Don't have a snippet of code to test right now?  No problem!</h4>
-        <button type="button" id="try_fibonacci">Try Recursive Fibonacci?</button>
-        <button type="button" id="try_bubblesort">Try Bubble Sort?</button>
-        <br><br>
-        <b><label>Select the language your code is in:</label></b>
-        <select id="prog_language">
-            <option value="C" selected="selected">C</option>
-            <option value="C++14 [GCC]">C++14</option>
-            <option value="C++ [GCC]">C++17</option>
-            <option value="C# [Mono]">C#</option>
-            <option value="Go">Go</option>
-            <option value="Java">Java</option>
-            <option value="JavaScript [Rhino]">JavaScript [Rhino]</option>
-            <option value="JavaScript [SpiderMonkey]">JavaScript [SpiderMonkey]</option>
-            <option value="Node.js">Node.js</option>
-            <option value="Objective-C">Objective-C</option>
-            <option value="Python 2.x [Pypy]">Python 2.7</option>
-            <option value="Python 3.x">Python 3.x</option>
-            <option value="R">R</option>
-            <option value="Rust">Rust</option>
-            <option value="Swift">Swift</option>
-        </select>
-        </form>
+        <div id="contents">
+            <h3>
+                <div class="navbar">
+                    <a id="Home" href="#">Home</a> |
+                    <a id="About" href="#">About</a> |
+                    <a id="Help" href="#">Help</a> |
+                    <a id="Contact Developer" href="#">Contact Developer</a>
+                </div>
+            </h3>
+            <h1>Welcome to Code Runtime Complexity Estimator</h1>
+            <h3>This is what it does and what you can expect:</h3>
+            <p>
+                //write about how code complexity is dependent on the test cases.<br>
+                //write what this website does.<br>
+                //have an example code in the "your code here" block and some sample
+                test cases in the "test cases" section<br>
+                //mention that this is a data driven approach (as opposed to
+                analytical) hence the estimated complexity will be closer to
+                the actual complexity if enough data is provided and
+                the cases are well spread.<br>
+                //if all the test cases are of worst case scenario then the resuls
+                will represent the worst case, else if would at best be an average
+                case estimate.
+            </p>
+            <form>
+            <h4>Don't have a snippet of code to test right now?  No problem!</h4>
+            <button type="button" id="try_fibonacci">Try Recursive Fibonacci?</button> OR 
+            <button type="button" id="try_bubblesort">Try Bubble Sort?</button>
+            <br>
+            <br>
+            <b><label>Select the language your code is in:</label></b>
+            <select id="prog_language">
+                <option value="C" selected="selected">C</option>
+                <option value="C++14 [GCC]">C++14</option>
+                <option value="C++ [GCC]">C++17</option>
+                <option value="C# [Mono]">C#</option>
+                <option value="Go">Go</option>
+                <option value="Java">Java</option>
+                <option value="JavaScript [Rhino]">JavaScript [Rhino]</option>
+                <option value="JavaScript [SpiderMonkey]">JavaScript [SpiderMonkey]</option>
+                <option value="Node.js">Node.js</option>
+                <option value="Objective-C">Objective-C</option>
+                <option value="Python 2.x [Pypy]">Python 2.7</option>
+                <option value="Python 3.x">Python 3.x</option>
+                <option value="R">R</option>
+                <option value="Rust">Rust</option>
+                <option value="Swift">Swift</option>
+            </select>
+            </form>
 
-        <h1>Your code here:</h1>
-        <!--<p>The default is C so write a C skeletal function<br></p>-->
-        <textarea id="code_textbox" rows=20 cols=100>
+            <h1>Your code here:</h1>
+            <textarea id="code_textbox" rows=20 cols=100>
 #include <stdio.h>
 
 int main(void) {
@@ -87,71 +85,56 @@ int main(void) {
 
     return 0;
 }</textarea>
-<br>
-<br>
+            <br>
+            <br>
+            After adding the input cases click here:  
+            <button id="submit_button">Submit</button>
+            <h2>Inputs:</h2>
+            <p>(PS, The more the better!)</p>
+            <form action="" id="form" >
+                1.<textarea id="test1" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
+                2.<textarea id="test2" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
+                3.<textarea id="test3" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
+                4.<textarea id="test4" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
+            </form>
+            &emsp;&emsp;<button type="button" id="Add more button">Add More Inputs</button>
+        </div>
 
-After adding the input cases click here: <button id="submit_button">
-    Submit</button>
-
-<h2>Inputs:</h2>
-<p>(PS, The more the better!)</p>
-
-<!--4 TextBoxes for test cases and a button to add more-->
-<form action="" id="form" >
-    1.<textarea id="test1" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
-    2.<textarea id="test2" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
-    3.<textarea id="test3" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
-    4.<textarea id="test4" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
-
-</form>
-&emsp;&emsp;<button type="button" id="Add more button">Add More Inputs</button>
-</div>
-
-<!-- div for loading image -->
-    <div class="image_div" id="processing_image">
-        <img src="rings_edited.gif" alt="Loading server response">
-    </div>
+        <!-- div for the processing gif -->
+        <div class="image_div" id="processing_image">
+            <img src="rings_edited.gif" alt="Loading server response">
+        </div>
     
-
-
-<!-- div for showing results and graphs -->
-<div id="output_graphs">
-
-    <h3 style="text-align:center;">The runtime complexity of your code based on the provided inputs is:</h3>
-    <h2 style="text-align:center;"><div id="final_complexity"></div></h2>
-
-    <table>
-        <tr>
-            <td>
-                <div id="divConstant" style="width: 900px; height: 500px;"></div>
-            </td>
-            <td>
-                <div id="divLogarithmic" style="width: 100%; height: 100%;"></div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div id="divLinear" style="width: 900px; height: 500px;"></div>
-            </td>
-            <td>
-                <div id="divQuasi" style="width: 900px; height: 500px;"></div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div id="divQuadratic" style="width: 900px; height: 500px;"></div>
-            </td>
-            <td>
-                <div id="divExponential" style="width: 900px; height: 500px;"></div>
-            </td>
-        </tr>
-    </table>
-
-</div>
-
-
-</body>
-
-
-
+        <!-- div for showing results and graphs -->
+        <div id="output_graphs">
+            <h3 style="text-align:center;">The runtime complexity of your code based on the provided inputs is:</h3>
+            <h2 style="text-align:center;"><div id="final_complexity"></div></h2>
+            <table>
+                <tr>
+                    <td>
+                        <div id="divConstant" style="width: 900px; height: 500px;"></div>
+                    </td>
+                    <td>
+                        <div id="divLogarithmic" style="width: 100%; height: 100%;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="divLinear" style="width: 900px; height: 500px;"></div>
+                    </td>
+                    <td>
+                        <div id="divQuasi" style="width: 900px; height: 500px;"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="divQuadratic" style="width: 900px; height: 500px;"></div>
+                    </td>
+                    <td>
+                        <div id="divExponential" style="width: 900px; height: 500px;"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
 </html>
