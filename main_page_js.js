@@ -306,6 +306,9 @@ document.getElementById("submit_button").onclick = function(){
             var endpoint = "complexity";
             var url = base_url+endpoint+"/"+code+"/"+testString+"/"+lang;
             req.open("GET", url, true);
+            req.onerror = function () {
+                alert("** An error occurred during the transaction");
+            };
             req.send()
             //hide the "contents" div, make the "loading" div visible
             document.getElementById("contents").setAttribute("hidden","");
