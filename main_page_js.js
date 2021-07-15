@@ -1,6 +1,7 @@
 //warning alert if the browser is not chrome
+var isChrome = 0;
 if(navigator.userAgent.indexOf("Chrome")!=-1){
-    null; //it is chrome
+    isChrome = 1;
 }else{
     alert("We have detected that you're using a browser other than Google Chrome.\n"+
           "Due to different security requirements, this site might not work on this browser.");
@@ -294,7 +295,10 @@ document.getElementById("submit_button").onclick = function(){
         var code = code.replaceAll("%2F", "%SLASH");
         var testString = encodeURIComponent(testString);
         var testString = testString.replaceAll("%2F", "%SLASH");
-        //creating an http request to API
+
+        //contacting to the server
+        try {
+            //creating an http request to API
         var req = new XMLHttpRequest();
         //var base_url = "https://3.135.19.178:80/"    //ec2 inbound http
         var base_url = "https://3.135.19.178:443/"    //ec2 inbound https
@@ -442,5 +446,22 @@ document.getElementById("submit_button").onclick = function(){
                 document.getElementById("submit_button").disabled = false;
             }
         };
+        }catch(err){
+            //hide the "processing" image div
+            document.getElementById("processing_image").setAttribute("hidden","");
+            //unhide the code and inputs textareas
+            document.getElementById("contents").removeAttribute("hidden");
+            if (isChrome==1){
+                errorMessage = "The server returned an error: "+err+
+                "\nPlease contact the developer if the error persists.";
+            }else{
+                errorMessage = "The server returned an error: "+err+
+                "\nPlease try again using a different browser (preferably Google Chrome, Version 91+)."+
+                "\nContact the developer if the error persists.";
+            }
+            alert(errorMessage)
+        } 
+
+        
     };
 };
