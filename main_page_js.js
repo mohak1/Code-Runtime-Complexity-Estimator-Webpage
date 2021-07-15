@@ -293,6 +293,9 @@ document.getElementById("submit_button").onclick = function(){
         var endpoint = "complexity";
         var url = base_url+endpoint+"/"+code+"/"+testString+"/"+lang;
         req.open("GET", url, true);
+        //CORS credentials for Firefox 
+        req.withCredentials = true;
+        req.onreadystatechange = handler;
         req.send()
         //hide the "contents" div, make the "loading" div visible
         document.getElementById("contents").setAttribute("hidden","");
