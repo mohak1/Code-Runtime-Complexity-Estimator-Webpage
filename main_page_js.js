@@ -295,7 +295,6 @@ document.getElementById("submit_button").onclick = function(){
         req.open("GET", url, true);
         //CORS credentials for Firefox 
         req.withCredentials = true;
-        req.onreadystatechange = handler;
         req.send()
         //hide the "contents" div, make the "loading" div visible
         document.getElementById("contents").setAttribute("hidden","");
