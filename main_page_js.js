@@ -311,10 +311,10 @@ document.getElementById("submit_button").onclick = function(){
             //unhide the code and inputs textareas
             document.getElementById("contents").removeAttribute("hidden");
             if(isChrome==1){
-                errorMessage = "The server returned an error: "+err+
+                var errorMessage = "The server returned an error."+
                 "\nPlease contact the developer if the error persists.";
             }else{
-                errorMessage = "The server returned an error: "+err+
+                var errorMessage = "The server returned an error."+
                 "\nPlease try again using a different browser (preferably Google Chrome, Version 91+)."+
                 "\nContact the developer if the error persists.";
             }
