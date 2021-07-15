@@ -246,227 +246,208 @@ document.getElementById("try_bubblesort").onclick = function(){
 };
 
 document.getElementById("submit_button").onclick = function(){
-    //contacting to the server
-    try {
-        //reseting the code and input flags
-        var code = 0;
-        var inputs = 0;
-        
-        //raise an alert if the code textarea is empty
-        var text_area_content = document.getElementById("code_textbox").value;
-        if(text_area_content.length < 1){
-            alert("It's not possible to estimate complexity when there "+ 
-            "isn't any code to begin with. Please type some code in the box and try again.")
-        }else{
-            //code is alright, set the code flag to 1
-            code = 1;
+    //reseting the code and input flags
+    var code = 0;
+    var inputs = 0;
+    
+    //raise an alert if the code textarea is empty
+    var text_area_content = document.getElementById("code_textbox").value;
+    if(text_area_content.length < 1){
+        alert("It's not possible to estimate complexity when there "+ 
+        "isn't any code to begin with. Please type some code in the box and try again.")
+    }else{
+        //code is alright, set the code flag to 1
+        code = 1;
+    }
+    //raise an alert if input cases is less than 4
+    var non_empty=0;
+    for(var i=1; i<=num_buttons; i++){
+        var input_content = document.getElementById("test"+i).value;
+        if(input_content.length>0){
+            non_empty++;
         }
-        //raise an alert if input cases is less than 4
-        var non_empty=0;
+    }
+    if(non_empty<4){
+        alert("Although higher number of inputs would result in a better estimate, "+
+        "please provide at least 4 inputs.")
+    }else{
+        //inputs are alright, set the inputs flag to 1
+        inputs = 1;
+    }
+    
+    var tests = [];
+    var testString = "";
+    if(code==1 && inputs==1){
+        //disable submit button
+        document.getElementById("submit_button").disabled = true;
+        //collect all non empty input casese
         for(var i=1; i<=num_buttons; i++){
             var input_content = document.getElementById("test"+i).value;
             if(input_content.length>0){
-                non_empty++;
+                testString = testString + input_content + "EnDoFtEsTcAsE";
             }
         }
-        if(non_empty<4){
-            alert("Although higher number of inputs would result in a better estimate, "+
-            "please provide at least 4 inputs.")
-        }else{
-            //inputs are alright, set the inputs flag to 1
-            inputs = 1;
-        }
+        tests = JSON.stringify(tests);
+        var user_code = document.getElementById("code_textbox").value;
+        var lang = document.getElementById("prog_language").value;
+        //encoding code and input cases to be sent as a part of the URL
+        var code = encodeURIComponent(user_code);
+        var code = code.replaceAll("%2F", "%SLASH");
+        var testString = encodeURIComponent(testString);
+        var testString = testString.replaceAll("%2F", "%SLASH");
+    
+        //creating an http request to API
+        var req = new XMLHttpRequest();
+        //var base_url = "https://3.135.19.178:80/"    //ec2 inbound http
+        var base_url = "https://3.135.19.178:443/"    //ec2 inbound https
+        var endpoint = "complexity";
+        var url = base_url+endpoint+"/"+code+"/"+testString+"/"+lang;
+        req.open("GET", url, true);
         
-        var tests = [];
-        var testString = "";
-        if(code==1 && inputs==1){
-            //disable submit button
-            document.getElementById("submit_button").disabled = true;
-            //collect all non empty input casese
-            for(var i=1; i<=num_buttons; i++){
-                var input_content = document.getElementById("test"+i).value;
-                if(input_content.length>0){
-                    testString = testString + input_content + "EnDoFtEsTcAsE";
-                }
+        //send an alert if server returns an error
+        req.onerror = function (){
+            //hide the "processing" image div
+            document.getElementById("processing_image").setAttribute("hidden","");
+            //unhide the code and inputs textareas
+            document.getElementById("contents").removeAttribute("hidden");
+            if(isChrome==1){
+                errorMessage = "The server returned an error: "+err+
+                "\nPlease contact the developer if the error persists.";
+            }else{
+                errorMessage = "The server returned an error: "+err+
+                "\nPlease try again using a different browser (preferably Google Chrome, Version 91+)."+
+                "\nContact the developer if the error persists.";
             }
-            tests = JSON.stringify(tests);
-            var user_code = document.getElementById("code_textbox").value;
-            var lang = document.getElementById("prog_language").value;
-            //encoding code and input cases to be sent as a part of the URL
-            var code = encodeURIComponent(user_code);
-            var code = code.replaceAll("%2F", "%SLASH");
-            var testString = encodeURIComponent(testString);
-            var testString = testString.replaceAll("%2F", "%SLASH");
-
-        
-            //creating an http request to API
-            var req = new XMLHttpRequest();
-            //var base_url = "https://3.135.19.178:80/"    //ec2 inbound http
-            var base_url = "https://3.135.19.178:443/"    //ec2 inbound https
-            var endpoint = "complexity";
-            var url = base_url+endpoint+"/"+code+"/"+testString+"/"+lang;
-            req.open("GET", url, true);
-            req.onerror = function () {
-                alert("** An error occurred during the transaction");
-            };
-            req.send()
-            //hide the "contents" div, make the "loading" div visible
-            document.getElementById("contents").setAttribute("hidden","");
-            document.getElementById("processing_image").removeAttribute("hidden");
-            document.getElementById("output_graphs").setAttribute("hidden","");
-            
-            //constant model
-            function constantModel(paramList, x) {
-                a = paramList[0];
-                return (x*0)+a;
-            }
-
-            //log model
-            function logModel(paramList, x) {
-                a = paramList[0];
-                b = paramList[1];
-                return (a*Math.log(x)) + b;
-            }
-
-            //linear model
-            function linearModel(paramList, x) {
-                a = paramList[0];
-                b = paramList[1];
-                return (a*x)+b;
-            }
-
-            //quasilinear model
-            function quasiModel(paramList, x) {
-                a = paramList[0];
-                b = paramList[1];
-
-                return (a*x*Math.log(x))+b;
-            }
-
-            //quadratic model
-            function quadModel(paramList, x) {
-                a = paramList[0];
-                b = paramList[1];
-                c = paramList[2];
-                return (a*x*x)+(b*x)+c;
-            }
-
-            //exponential model
-            function expModel(paramList, x) {
-                a = paramList[0];
-                b = paramList[1];
-                return Math.pow(2, ((a*x)+b));
-            }
-
-            req.onload = function(){
-                //hide the "processing" image div
-                document.getElementById("processing_image").setAttribute("hidden","");
-                //unhide the code and inputs textareas
-                document.getElementById("contents").removeAttribute("hidden");
-                //compile the results
-                var parsedReq = JSON.parse(req.responseText);
-                parsedReq = JSON.parse(parsedReq);
-
-                if(parsedReq.hasOwnProperty('errorMessage')){
-                    //the process returned an error
-                    alert("Error occured:\n"+parsedReq['errorMessage'])
-                }else{
-                    //show the results and plot the graphs
-                    var estimatedComplexity = parsedReq.estimatedComplexity;
-                    var runtimeList = parsedReq["runtimeList"];
-                    var constantModelParams = parsedReq["constantModel"];
-                    var linearModelParams = parsedReq["linearModel"];
-                    var logModelParams = parsedReq["logModel"];
-                    var quasiModelParams = parsedReq["quasiModel"];
-                    var quadModelParams = parsedReq["quadraticModel"];
-                    var expModelParams = parsedReq["exponentialModel"];
-                
-                    //display the runtime complexity
-                    document.getElementById("final_complexity").innerHTML = estimatedComplexity;
-
-                    //google data array for constant plot
-                    var constantPlot = [['X', 'Points', 'Constant Line']];
-                    for(var i=1; i<=runtimeList.length; i++){
-                        var constantModelValue = constantModel(constantModelParams, i);
-                        var newRow = [i, runtimeList[i-1], constantModelValue];
-                        constantPlot.push(newRow);
-                    }
-
-                    //google data array for log plot
-                    var logPlot = [['X', 'Points', 'Logarithmic Curve']];
-                    for(var i=1; i<=runtimeList.length; i++){
-                        var logModelValue = logModel(logModelParams, i);
-                        var newRow = [i, runtimeList[i-1], logModelValue];
-                        logPlot.push(newRow);
-                    }
-
-                    //google data array for linear plot
-                    var linearPlot = [['X', 'Points', 'Linear Line']];
-                    for(var i=1; i<=runtimeList.length; i++){
-                        var linearModelValue = linearModel(linearModelParams, i);
-                        var newRow = [i, runtimeList[i-1], linearModelValue];
-                        linearPlot.push(newRow);
-                    }
-
-                    //google data array for quasilinear plot
-                    var quasiPlot = [['X', 'Points', 'Quasilinear Curve']];
-                    for(var i=1; i<=runtimeList.length; i++){
-                        var quasiModelValue = quasiModel(quasiModelParams, i);
-                        var newRow = [i, runtimeList[i-1], quasiModelValue];
-                        quasiPlot.push(newRow);
-                    }
-
-                    //google data array for quadratic plot
-                    var quadPlot = [['X', 'Points', 'Quadratic Curve']];
-                    for(var i=1; i<=runtimeList.length; i++){
-                        var quadModelValue = quadModel(quadModelParams, i);
-                        var newRow = [i, runtimeList[i-1], quadModelValue];
-                        quadPlot.push(newRow);
-                    }
-
-                    //google data array for exponential plot
-                    var expPlot = [['X', 'Points', 'Exponential Curve']];
-                    for(var i=1; i<=runtimeList.length; i++){
-                        var expModelValue = expModel(expModelParams, i);
-                        var newRow = [i, runtimeList[i-1], expModelValue];
-                        expPlot.push(newRow);
-                    }
-                
-                    //draw all the plots 
-                    drawChart(constantPlot, "Constant");
-                    drawChart(logPlot, "Logarithmic");
-                    drawChart(linearPlot, "Linear");
-                    drawChart(quasiPlot, "Quasilinear");
-                    drawChart(quadPlot, "Quadratic");
-                    drawChart(expPlot, "Exponential");
-                    //make them visible
-                    document.getElementById("output_graphs").removeAttribute("hidden");
-
-                    //smoothly scroll to the plotted graphs div
-                    var elmntToView = document.getElementById("output_graphs");
-                    elmntToView.scrollIntoView({behavior: "smooth"});
-                
-                    //enable submit button
-                    document.getElementById("submit_button").disabled = false;
-                }
-            };
-         
-
-        
+            alert(errorMessage);
         };
-    }catch(err){
-        //hide the "processing" image div
-        document.getElementById("processing_image").setAttribute("hidden","");
-        //unhide the code and inputs textareas
-        document.getElementById("contents").removeAttribute("hidden");
-        if (isChrome==1){
-            errorMessage = "The server returned an error: "+err+
-            "\nPlease contact the developer if the error persists.";
-        }else{
-            errorMessage = "The server returned an error: "+err+
-            "\nPlease try again using a different browser (preferably Google Chrome, Version 91+)."+
-            "\nContact the developer if the error persists.";
+        
+        req.send()
+        //hide the "contents" div, make the "loading" div visible
+        document.getElementById("contents").setAttribute("hidden","");
+        document.getElementById("processing_image").removeAttribute("hidden");
+        document.getElementById("output_graphs").setAttribute("hidden","");
+        
+        //constant model
+        function constantModel(paramList, x) {
+            a = paramList[0];
+            return (x*0)+a;
         }
-        alert(errorMessage)
-    }
+        //log model
+        function logModel(paramList, x) {
+            a = paramList[0];
+            b = paramList[1];
+            return (a*Math.log(x)) + b;
+        }
+        //linear model
+        function linearModel(paramList, x) {
+            a = paramList[0];
+            b = paramList[1];
+            return (a*x)+b;
+        }
+        //quasilinear model
+        function quasiModel(paramList, x) {
+            a = paramList[0];
+            b = paramList[1];
+            return (a*x*Math.log(x))+b;
+        }
+        //quadratic model
+        function quadModel(paramList, x) {
+            a = paramList[0];
+            b = paramList[1];
+            c = paramList[2];
+            return (a*x*x)+(b*x)+c;
+        }
+        //exponential model
+        function expModel(paramList, x) {
+            a = paramList[0];
+            b = paramList[1];
+            return Math.pow(2, ((a*x)+b));
+        }
+        req.onload = function(){
+            //hide the "processing" image div
+            document.getElementById("processing_image").setAttribute("hidden","");
+            //unhide the code and inputs textareas
+            document.getElementById("contents").removeAttribute("hidden");
+            //compile the results
+            var parsedReq = JSON.parse(req.responseText);
+            parsedReq = JSON.parse(parsedReq);
+            if(parsedReq.hasOwnProperty('errorMessage')){
+                //the process returned an error
+                alert("Error occured:\n"+parsedReq['errorMessage'])
+            }else{
+                //show the results and plot the graphs
+                var estimatedComplexity = parsedReq.estimatedComplexity;
+                var runtimeList = parsedReq["runtimeList"];
+                var constantModelParams = parsedReq["constantModel"];
+                var linearModelParams = parsedReq["linearModel"];
+                var logModelParams = parsedReq["logModel"];
+                var quasiModelParams = parsedReq["quasiModel"];
+                var quadModelParams = parsedReq["quadraticModel"];
+                var expModelParams = parsedReq["exponentialModel"];
+            
+                //display the runtime complexity
+                document.getElementById("final_complexity").innerHTML = estimatedComplexity;
+                //google data array for constant plot
+                var constantPlot = [['X', 'Points', 'Constant Line']];
+                for(var i=1; i<=runtimeList.length; i++){
+                    var constantModelValue = constantModel(constantModelParams, i);
+                    var newRow = [i, runtimeList[i-1], constantModelValue];
+                    constantPlot.push(newRow);
+                }
+                //google data array for log plot
+                var logPlot = [['X', 'Points', 'Logarithmic Curve']];
+                for(var i=1; i<=runtimeList.length; i++){
+                    var logModelValue = logModel(logModelParams, i);
+                    var newRow = [i, runtimeList[i-1], logModelValue];
+                    logPlot.push(newRow);
+                }
+                //google data array for linear plot
+                var linearPlot = [['X', 'Points', 'Linear Line']];
+                for(var i=1; i<=runtimeList.length; i++){
+                    var linearModelValue = linearModel(linearModelParams, i);
+                    var newRow = [i, runtimeList[i-1], linearModelValue];
+                    linearPlot.push(newRow);
+                }
+                //google data array for quasilinear plot
+                var quasiPlot = [['X', 'Points', 'Quasilinear Curve']];
+                for(var i=1; i<=runtimeList.length; i++){
+                    var quasiModelValue = quasiModel(quasiModelParams, i);
+                    var newRow = [i, runtimeList[i-1], quasiModelValue];
+                    quasiPlot.push(newRow);
+                }
+                //google data array for quadratic plot
+                var quadPlot = [['X', 'Points', 'Quadratic Curve']];
+                for(var i=1; i<=runtimeList.length; i++){
+                    var quadModelValue = quadModel(quadModelParams, i);
+                    var newRow = [i, runtimeList[i-1], quadModelValue];
+                    quadPlot.push(newRow);
+                }
+                //google data array for exponential plot
+                var expPlot = [['X', 'Points', 'Exponential Curve']];
+                for(var i=1; i<=runtimeList.length; i++){
+                    var expModelValue = expModel(expModelParams, i);
+                    var newRow = [i, runtimeList[i-1], expModelValue];
+                    expPlot.push(newRow);
+                }
+            
+                //draw all the plots 
+                drawChart(constantPlot, "Constant");
+                drawChart(logPlot, "Logarithmic");
+                drawChart(linearPlot, "Linear");
+                drawChart(quasiPlot, "Quasilinear");
+                drawChart(quadPlot, "Quadratic");
+                drawChart(expPlot, "Exponential");
+                //make them visible
+                document.getElementById("output_graphs").removeAttribute("hidden");
+                //smoothly scroll to the plotted graphs div
+                var elmntToView = document.getElementById("output_graphs");
+                elmntToView.scrollIntoView({behavior: "smooth"});
+            
+                //enable submit button
+                document.getElementById("submit_button").disabled = false;
+            }
+        };
+     
+    
+    };
 };
