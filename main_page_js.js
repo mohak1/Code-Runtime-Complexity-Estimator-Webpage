@@ -1,3 +1,11 @@
+//warning alert if the browser is not chrome
+if(navigator.userAgent.indexOf("Chrome")!=-1){
+    null; //it is chrome
+}else{
+    alert("We have detected that you're using a browser other than Google Chrome.\n"+
+          "Due to different security requirements, this site might not work on this browser.");
+}
+
 //disable the loading gif div element on page load
 document.getElementById("processing_image").setAttribute("hidden","");
 //disable the output graphs div on page load
@@ -293,6 +301,7 @@ document.getElementById("submit_button").onclick = function(){
         var endpoint = "complexity";
         var url = base_url+endpoint+"/"+code+"/"+testString+"/"+lang;
         req.open("GET", url, true);
+        req.withCredentials = true;
         req.send()
         //hide the "contents" div, make the "loading" div visible
         document.getElementById("contents").setAttribute("hidden","");
