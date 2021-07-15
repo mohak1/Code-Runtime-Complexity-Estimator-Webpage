@@ -288,7 +288,8 @@ document.getElementById("submit_button").onclick = function(){
         var testString = testString.replaceAll("%2F", "%SLASH");
         //creating an http request to API
         var req = new XMLHttpRequest();
-        var base_url = "http://3.135.19.178:80/"    //ec2 inbound http 
+        //var base_url = "https://3.135.19.178:80/"    //ec2 inbound http
+        var base_url = "https://3.135.19.178:443/"    //ec2 inbound https
         var endpoint = "complexity";
         var url = base_url+endpoint+"/"+code+"/"+testString+"/"+lang;
         req.open("GET", url, true);
