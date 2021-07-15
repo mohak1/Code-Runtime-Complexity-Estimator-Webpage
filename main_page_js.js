@@ -394,6 +394,7 @@ document.getElementById("submit_button").onclick = function(){
                     var newRow = [i, runtimeList[i-1], constantModelValue];
                     constantPlot.push(newRow);
                 }
+                
                 //google data array for log plot
                 var logPlot = [['X', 'Points', 'Logarithmic Curve']];
                 for(var i=1; i<=runtimeList.length; i++){
@@ -401,6 +402,7 @@ document.getElementById("submit_button").onclick = function(){
                     var newRow = [i, runtimeList[i-1], logModelValue];
                     logPlot.push(newRow);
                 }
+                
                 //google data array for linear plot
                 var linearPlot = [['X', 'Points', 'Linear Line']];
                 for(var i=1; i<=runtimeList.length; i++){
@@ -408,6 +410,7 @@ document.getElementById("submit_button").onclick = function(){
                     var newRow = [i, runtimeList[i-1], linearModelValue];
                     linearPlot.push(newRow);
                 }
+                
                 //google data array for quasilinear plot
                 var quasiPlot = [['X', 'Points', 'Quasilinear Curve']];
                 for(var i=1; i<=runtimeList.length; i++){
@@ -415,6 +418,7 @@ document.getElementById("submit_button").onclick = function(){
                     var newRow = [i, runtimeList[i-1], quasiModelValue];
                     quasiPlot.push(newRow);
                 }
+                
                 //google data array for quadratic plot
                 var quadPlot = [['X', 'Points', 'Quadratic Curve']];
                 for(var i=1; i<=runtimeList.length; i++){
@@ -422,6 +426,7 @@ document.getElementById("submit_button").onclick = function(){
                     var newRow = [i, runtimeList[i-1], quadModelValue];
                     quadPlot.push(newRow);
                 }
+                
                 //google data array for exponential plot
                 var expPlot = [['X', 'Points', 'Exponential Curve']];
                 for(var i=1; i<=runtimeList.length; i++){
@@ -437,8 +442,10 @@ document.getElementById("submit_button").onclick = function(){
                 drawChart(quasiPlot, "Quasilinear");
                 drawChart(quadPlot, "Quadratic");
                 drawChart(expPlot, "Exponential");
+                
                 //make them visible
                 document.getElementById("output_graphs").removeAttribute("hidden");
+                
                 //smoothly scroll to the plotted graphs div
                 var elmntToView = document.getElementById("output_graphs");
                 elmntToView.scrollIntoView({behavior: "smooth"});
@@ -447,7 +454,5 @@ document.getElementById("submit_button").onclick = function(){
                 document.getElementById("submit_button").disabled = false;
             }
         };
-     
-    
     };
 };
