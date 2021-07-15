@@ -310,6 +310,9 @@ document.getElementById("submit_button").onclick = function(){
             document.getElementById("processing_image").setAttribute("hidden","");
             //unhide the code and inputs textareas
             document.getElementById("contents").removeAttribute("hidden");
+            //enable the submit button
+            document.getElementById("submit_button").disabled = false;
+
             if(isChrome==1){
                 var errorMessage = "The server returned an error."+
                 "\nPlease contact the developer if the error persists.";
@@ -363,6 +366,7 @@ document.getElementById("submit_button").onclick = function(){
             b = paramList[1];
             return Math.pow(2, ((a*x)+b));
         }
+        
         req.onload = function(){
             //hide the "processing" image div
             document.getElementById("processing_image").setAttribute("hidden","");
