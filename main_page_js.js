@@ -1,6 +1,6 @@
 //alert about mobile browsers
-alert("Due to security certificate issues, this website does not work on mobile browsers."+
-"Please use a desktop browser (preferable Google Chrome) and try again.")
+alert("Due to security certificate issues, this website does not work on mobile browsers. "+
+"Please make sure you're on a desktop browser (preferable Google Chrome).")
 //warning alert if the browser is not chrome
 var isChrome = 0;
 if(navigator.userAgent.indexOf("Chrome")!=-1){

@@ -35,23 +35,38 @@
                 </div>
             </h3>
             <h1>Welcome to Code Runtime Complexity Estimator</h1>
-            <h3>This is what it does and what you can expect:</h3>
             <p>
-                //write about how code complexity is dependent on the test cases.<br>
-                //write what this website does.<br>
-                //have an example code in the "your code here" block and some sample
-                test cases in the "test cases" section<br>
-                //mention that this is a data driven approach (as opposed to
-                analytical) hence the estimated complexity will be closer to
-                the actual complexity if enough data is provided and
-                the cases are well spread.<br>
-                //if all the test cases are of worst case scenario then the resuls
-                will represent the worst case, else if would at best be an average
-                case estimate.
+                Simply put, this website lets you estimate the runtime complexity of your code by tracking its execution time.<br>
+                All you have to do is take your code and some input cases, fill them in the respective textareas and hit the "Submit" button.<br> 
+                <br>Now, it all sounds quite straightforward but there are some things to keep in mind before you proceed:<br> 
+                
+                <h3>How does it work?</h3>
+                The code and the input cases are sent to an online compiler for execution and their runtimes are noted.<br>
+                These runtimes are then used as data points and are fitted to the runtime complexity equations (Logarithmic, Linear, Exponential, etc).<br>
+                The equation that fits the best to these data points is declared as the runtime complexity for the code.<br>
+                
+                <h3>What could go wrong?</h3>
+                Since no analytical technique is used here for determining the runtime complexity of the code, it is important to realise <br> 
+                the importance of the inputs that are to be provided.<br> 
+                This means that if all the inputs are worst-case scenarios with increasing but equally spaced test cases, then it can be expected <br>
+                to obtain the worst case time complexity of the code.<br> 
+                One of the main reasons of getting an incorrect estimate could be the use of insufficient inputs or using inputs that do not represent <br>
+                the worse-case runtime. It is also important for the inputs to be equally spaced so that the change in runtime can be correctly determined.<br> 
+                
+                <h3>Obtained runtime estimates: Best, Average or Worst-case?</h3>
+                Just as with every data-driven technique, this one also majorly depends on the inputs it gets to work with.<br>
+                If all the inputs provided are worst-case scenarions, then with enough number of well spaced inputs you should obtain the worst-case estimate.<br>
+                However, if the inputs are provided at random, with a mix of all runtime scenarios, then the estimated runtime complexity would most likely be average-case.   
+
+                <h3>Bottom Line:</h3>
+                This method of estimating runtime complexity is neither foolproof nor scientific.<br> 
+                At best, it is a data driven way of achieving the same goal.<br>
+                The results you obtain from this website very much depend on the inputs you provide for the code.<br> 
+                With enough number of well spread worst-case inputs, you should be able to obtain an accurate Big-O complexity estimate of your code. 
             </p>
             <form>
             <h4>Don't have a snippet of code to test right now?  No problem!</h4>
-            <button type="button" id="try_fibonacci">Try Recursive Fibonacci?</button>
+            <button type="button" id="try_fibonacci">Try Recursive Fibonacci</button>
             <br>
             <br>
             <b><label>Select the language your code is in:</label></b>
@@ -88,7 +103,6 @@ int main(void) {
             After adding the input cases click here:  
             <button id="submit_button">Submit</button>
             <h2>Inputs:</h2>
-            <p>(PS, The more the better!)</p>
             <form action="" id="form" >
                 1.<textarea id="test1" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
                 2.<textarea id="test2" rows=2 cols=50 placeholder="inputs are encoded as string by default"></textarea><br><br>
@@ -105,7 +119,7 @@ int main(void) {
     
         <!-- div for showing results and graphs -->
         <div id="output_graphs">
-            <h3 style="text-align:center;">The runtime complexity of your code based on the provided inputs is:</h3>
+            <h3 style="text-align:center;">The approximate runtime complexity of your code based on the provided inputs is:</h3>
             <h2 style="text-align:center;"><div id="final_complexity"></div></h2>
             <table>
                 <tr>
