@@ -182,8 +182,6 @@ document.getElementById("Add more button").onclick = function(){
 
 //try fibonacci code button
 document.getElementById("try_fibonacci").onclick = function(){
-    //disable the "try bubble sort" button
-    document.getElementById("try_bubblesort").disabled = true;
     //disable the language selection list
     document.getElementById("prog_language").disabled = true;
     var fibonacci_code = "def recursive_fibonacci(n):\n"+
@@ -211,38 +209,6 @@ document.getElementById("try_fibonacci").onclick = function(){
     add_new_input_case(val = "25");
     add_new_input_case(val = "30");
     add_new_input_case(val = "32");
-};
-
-//try bubble sort code button
-document.getElementById("try_bubblesort").onclick = function(){
-    //disable the "try fibonacci" button
-    document.getElementById("try_fibonacci").disabled = true;
-    //disable the language selection list
-    document.getElementById("prog_language").disabled = true;
-    var bubblesort_code = "def bubble_sort(our_list):\n"+
-    "    for i in range(len(our_list)):\n"+
-    "        for j in range(len(our_list) - 1):\n"+
-    "            if our_list[j] > our_list[j+1]:\n"+
-    "                our_list[j], our_list[j+1] = our_list[j+1], our_list[j]\n\n"+
-    "arr = input().split(',')\n"+
-    "int_arr = [int(i) for i in arr]\n"+
-    "bubble_sort(arr)";
-    document.getElementById("code_textbox").value = bubblesort_code;
-    document.getElementById("prog_language").value = "Python 3.x";
-    //setting input case values
-    document.getElementById("test1").value = "80, 513, 373, 665, 285, 580, 204, 178, 206";
-    document.getElementById("test2").value = "716, 29, 748, 784, 751, 812, 505, 240, 97, 543, 829, 536, 203, 45, 451, 233, 766, 796, 573, 880, 545, 776, 447, 776, 103, 25, 557, 149, 582, 639, 196, 89";
-    document.getElementById("test3").value = "412, 140, 28, 680, 670, 807, 482, 23, 87, 184, 483, 145, 840, 788, 299, 411, 735, 635, 417, 845, 184, 880, 305, 93, 395, 43, 715, 213, 679, 504, 703, 292, 436, 139, 685, 288, 206, 599, 496, 339";
-    document.getElementById("test4").value = "101, 505, 710, 361, 881, 101, 505, 710, 361, 881";
-    add_new_input_case(val = "782, 157, 765, 772, 459, 120, 884, 597, 730, 804, 725, 816, 656, 409, 644, 272, 51, 359, 73, 643, 263, 344, 624, 444, 651, 748, 722, 352, 359, 851, 651, 892, 250, 899, 182, 247, 766, 867");
-    add_new_input_case(val = "619, 789, 802, 305, 19, 41, 393, 878, 533, 849, 277, 619, 789, 802, 305, 19, 41, 393, 878, 533, 849, 277");
-    add_new_input_case(val = "636, 88, 429, 763, 46, 309, 28, 531, 777, 485, 845, 703, 475, 197, 144, 328, 833, 674, 444, 230, 85, 752");
-    add_new_input_case(val = "79, 261, 508, 538, 416, 106, 534, 622, 745, 460, 337, 552, 696, 900");
-    add_new_input_case(val = "372, 346, 895, 71, 33, 723, 844, 726, 445, 724, 617, 216, 531, 234, 737, 634, 466, 560, 870, 217, 666, 796, 461, 156, 299, 273, 97, 698, 887, 846, 435, 760, 776, 823, 36, 655, 372, 346, 895, 71, 33, 723, 844, 726, 445, 724, 617, 216, 531, 234, 737, 634, 466, 560, 870, 217, 666, 796, 461, 156, 299, 273, 97, 698, 887, 846, 435, 760, 776, 823, 36, 655");
-    add_new_input_case(val = "101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881");
-    add_new_input_case(val = "101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881, 101, 505, 710, 361, 881");
-    add_new_input_case(val = "671, 92, 251, 132, 263, 508, 494, 144, 689, 706, 815, 167, 181, 90, 611, 417, 15, 257, 295, 18, 96, 75, 383, 350, 819, 186, 524, 776, 799, 643");
-    add_new_input_case(val = "33, 617, 586, 637, 420, 83, 16, 652, 674, 413, 492, 824, 33, 617, 586, 637, 420, 83, 16, 652, 674, 413, 492, 824, 33, 617, 586, 637, 420, 83, 16, 652, 674, 413, 492, 824");
 };
 
 document.getElementById("submit_button").onclick = function(){
