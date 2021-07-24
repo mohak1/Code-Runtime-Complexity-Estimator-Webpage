@@ -1,15 +1,3 @@
-//alert about mobile browsers
-alert("Due to security certificate issues, this website does not work on mobile browsers. "+
-"Please make sure you're on a desktop browser (preferable Google Chrome).")
-//warning alert if the browser is not chrome
-var isChrome = 0;
-if(navigator.userAgent.indexOf("Chrome")!=-1){
-    isChrome = 1;
-}else{
-    alert("We have detected that you're using a browser other than Google Chrome.\n"+
-          "Due to different security requirements, this site might not work on this browser.");
-}
-
 //disable the loading gif div element on page load
 document.getElementById("processing_image").setAttribute("hidden","");
 //disable the output graphs div on page load
@@ -269,10 +257,7 @@ document.getElementById("submit_button").onclick = function(){
         var req = new XMLHttpRequest();
         //var base_url = "https://3.135.19.178:80/"    //ec2 inbound http
         // var base_url = "https://3.135.19.178:443/"    //ec2 inbound https
-        
-        //var base_url = "http://ip.aws.cloudns.nz/"    //SSL certificate
-        
-        var base_url = "https://ip.aws.cloudns.nz/"
+        var base_url = "https://ip.aws.cloudns.nz/"     //has SSL certificate!
         
         var endpoint = "complexity";
         var url = base_url+endpoint+"/"+code+"/"+testString+"/"+lang;
@@ -287,14 +272,8 @@ document.getElementById("submit_button").onclick = function(){
             //enable the submit button
             document.getElementById("submit_button").disabled = false;
 
-            if(isChrome==1){
-                var errorMessage = "The server returned an error."+
+            var errorMessage = "The server returned an error."+
                 "\nPlease contact the developer if the error persists.";
-            }else{
-                var errorMessage = "The server returned an error."+
-                "\nPlease try again using a different browser (preferably Google Chrome, Version 91+)."+
-                "\nContact the developer if the error persists.";
-            }
             alert(errorMessage);
         };
         
