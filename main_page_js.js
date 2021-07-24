@@ -270,7 +270,9 @@ document.getElementById("submit_button").onclick = function(){
         //var base_url = "https://3.135.19.178:80/"    //ec2 inbound http
         // var base_url = "https://3.135.19.178:443/"    //ec2 inbound https
         
-        var base_url = "http://ip.aws.cloudns.nz/"    //SSL certificate
+        //var base_url = "http://ip.aws.cloudns.nz/"    //SSL certificate
+        
+        var base_url = "https://ip.aws.cloudns.nz/"
         
         var endpoint = "complexity";
         var url = base_url+endpoint+"/"+code+"/"+testString+"/"+lang;
