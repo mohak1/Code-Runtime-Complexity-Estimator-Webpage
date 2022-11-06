@@ -35,35 +35,7 @@
                 </div>
             </h3>
             <h1>Welcome to Code Runtime Complexity Estimator</h1>
-            <!-- <p>
-                Simply put, this website lets you estimate the runtime complexity of your code by tracking its execution time.<br>
-                All you have to do is take your code and some input cases, fill them in the respective textareas and hit the "Submit" button.<br> 
-                <br>Now, it all sounds quite straightforward but there are some things to keep in mind before you proceed:<br> 
-                
-                <h3>How does it work?</h3>
-                The code and the input cases are sent to an online compiler for execution and their runtimes are noted.<br>
-                These runtimes are then used as data points and are fitted to the runtime complexity equations (Logarithmic, Linear, Exponential, etc).<br>
-                The equation that fits the best to these data points is declared as the runtime complexity for the code.<br>
-                
-                <h3>What could go wrong?</h3>
-                Since no analytical technique is used here for determining the runtime complexity of the code, it is important to realise <br> 
-                the importance of the inputs that are to be provided.<br> 
-                This means that if all the inputs are worst-case scenarios with increasing but equally spaced test cases, then it can be expected <br>
-                to obtain the worst case time complexity of the code.<br> 
-                One of the main reasons of getting an incorrect estimate could be the use of insufficient inputs or using inputs that do not represent <br>
-                the worse-case runtime. It is also important for the inputs to be equally spaced so that the change in runtime can be correctly determined.<br> 
-                
-                <h3>Obtained runtime estimates: Best, Average or Worst-case?</h3>
-                Just as with every data-driven technique, this one also majorly depends on the inputs it gets to work with.<br>
-                If all the inputs provided are worst-case scenarions, then with enough number of well spaced inputs you should obtain the worst-case estimate.<br>
-                However, if the inputs are provided at random, with a mix of all runtime scenarios, then the estimated runtime complexity would most likely be average-case.   
-
-                <h3>Bottom Line:</h3>
-                This method of estimating runtime complexity is neither foolproof nor scientific.<br> 
-                At best, it is a data driven way of achieving the same goal.<br>
-                The results you obtain from this website very much depend on the inputs you provide for the code.<br> 
-                With enough numbelr of well spread worst-case inputs, you should be able to obtain an accurate Big-O complexity estimate of your code. 
-            </p> -->
+            
             <form>
             <h4>Don't have a snippet of code to test right now?  No problem!</h4>
             <button type='button' id='try_fibonacci'>Try Recursive Fibonacci</button>
@@ -81,8 +53,8 @@
                 <label for='string' id='string_label'>String</label>
             <input type='radio' name='input_type' id='number'>
                 <label for='number' id='number_label'>Number</label>
-            <input type='radio' name='input_type' id='array'>
-                <label for='array' id='array_label'>Array/List</label>
+            <!-- <input type='radio' name='input_type' id='array'>
+                <label for='array' id='array_label'>Array/List</label> -->
             <br><br>
             <label id='num_types_allowed'>
                 Numeric values allowed:
@@ -91,18 +63,6 @@
                 <label for='int' id='int_label'>Integer</label>    
             <input type='checkbox' id='float' checked>
                 <label for='float' id='float_label'>Float</label>
-            
-            
-            
-            <label id='arr_ele_allowed_label'>
-                Elements allowed in the array/list:
-            </label>
-            <input type='radio' id='int_radio' name='arr_ele_type'>
-            <label for='int_radio' id='int_radio_label'>Integer</label>
-            <input type='radio' id='float_radio' name='arr_ele_type'>
-            <label for='float_radio' id='float_radio_label'>Float</label>
-            <input type='radio' id='str_radio' name='arr_ele_type'>
-            <label for='str_radio' id='str_radio_label'>String</label>
 
             <br id='inter_break_1'><br id='inter_break_2'>
 
