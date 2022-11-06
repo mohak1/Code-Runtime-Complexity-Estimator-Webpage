@@ -130,11 +130,10 @@ function hide_all_sub_selections(){
 // hide the sub-selections of radio buttons on page load
 hide_all_sub_selections();
 
-var base_url = 'http://localhost:8000/'
+var BASE_URL = 'http://localhost:8000/'
 // set the languages 
-fetch(base_url + 'get_active_languages', { method: 'GET'})
+fetch(BASE_URL + 'get_active_languages', { method: 'GET'})
     .then((response) => {
-        console.log('response status is ', response.status)
         if (response.status == 503){
             // compiler isn't available; disable the elements
             language_selector.disabled = true;
@@ -362,7 +361,6 @@ document.getElementById('submit_button').onclick = function(){
             alert('Please select the characters allowed in the string');
             return;
         }
-
         if (
             isNaN(parseInt(str_len_input.value)) || 
             parseInt(str_len_input.value)<1
@@ -519,10 +517,8 @@ document.getElementById('submit_button').onclick = function(){
         response_json["array_details"] = arr_details
     }
 
-    console.log(response_json)
-
     // cors: https://stackoverflow.com/a/59353387
-    fetch(base_url + 'estimate_complexity', {
+    fetch(BASE_URL + 'estimate_complexity', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
