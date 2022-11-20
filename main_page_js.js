@@ -369,7 +369,7 @@ document.getElementById('submit_button').onclick = function(){
         }
     }).then((response_json) => {
         //show the results and plot the graphs
-        var estimatedComplexity = response_json['estimatedComplexity'];
+        var estimatedComplexity = response_json['estimated_complexity'];
         var runtimeList = response_json["runtime_list"];
         var constantModelParams = response_json["constant_model"];
         var linearModelParams = response_json["linear_model"];
