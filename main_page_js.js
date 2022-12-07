@@ -236,8 +236,11 @@ try_fibonacci_button.onclick = function(){
     float_box.checked = false;
     float_box.disabled = true;
     range_start.style.display = 'inline';
+    range_start.value = '1';
+    range_start.disabled = true;
     range_start_label.style.display = 'inline';
-    range_end.value = '50';
+    range_end.value = '32';
+    range_end.disabled = true;
     range_end.style.display = 'inline';
     range_end_label.style.display = 'inline';
 };
@@ -248,6 +251,9 @@ submit_button.onclick = function(){
         alert("Plesae enter some code in the provided area");
         return;
     }
+
+    // disable submit button
+    submit_button.disabled = true;
 
     var input_type;
     var string_details;
@@ -477,6 +483,9 @@ submit_button.onclick = function(){
         //smoothly scroll to the plotted graphs div
         var elmntToView = document.getElementById("output_graphs");
         elmntToView.scrollIntoView({behavior: "smooth"});
+
+        // enable submit button
+        submit_button.disabled = false;
 
     });
 };
