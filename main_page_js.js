@@ -113,7 +113,7 @@ function hide_all_sub_selections(){
 // hide the sub-selections of radio buttons on page load
 hide_all_sub_selections();
 
-var BASE_URL = 'https://complexity-backend.freeddns.org/py-server'
+var BASE_URL = 'https://complexity-backend.freeddns.org/py-server/'
 // set the languages 
 fetch(BASE_URL + 'get_active_languages', { method: 'GET'})
     .then((response) => {
