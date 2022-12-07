@@ -113,8 +113,7 @@ function hide_all_sub_selections(){
 // hide the sub-selections of radio buttons on page load
 hide_all_sub_selections();
 
-// var BASE_URL = 'http://localhost:8000/'
-var BASE_URL = 'http://ec2-18-170-94-251.eu-west-2.compute.amazonaws.com:8000/'
+var BASE_URL = 'https://complexity-backend.freeddns.org/py-server'
 // set the languages 
 fetch(BASE_URL + 'get_active_languages', { method: 'GET'})
     .then((response) => {
