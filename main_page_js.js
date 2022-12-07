@@ -197,7 +197,7 @@ function send_error(error_message){
 }
 
 // set code and test case options for fibonacci
-document.getElementById('try_fibonacci').onclick = function(){
+try_fibonacci_button.onclick = function(){
     // clear all selections
     hide_all_sub_selections();
     // disable the language selector and code area
@@ -226,7 +226,6 @@ document.getElementById('try_fibonacci').onclick = function(){
     // set input type
     num_radio.checked = true;
     string_radio.disabled = true;
-    // array_radio.disabled = true;
     num_type_label.style.display = 'inline';
     int_box.style.display = 'inline';
     int_label.style.display = 'inline';
@@ -243,7 +242,7 @@ document.getElementById('try_fibonacci').onclick = function(){
     range_end_label.style.display = 'inline';
 };
 
-document.getElementById('submit_button').onclick = function(){
+submit_button.onclick = function(){
     // show an alert if there is no code
     if (code_textbox.value.length < 1){
         alert("Plesae enter some code in the provided area");
@@ -253,7 +252,6 @@ document.getElementById('submit_button').onclick = function(){
     var input_type;
     var string_details;
     var number_details;
-    var arr_details;
 
     if (string_radio.checked){
         input_type = 0
@@ -416,7 +414,7 @@ document.getElementById('submit_button').onclick = function(){
         }
 
         //display the runtime complexity
-        document.getElementById("final_complexity").innerHTML = estimatedComplexity;
+        document.getElementById('final_complexity').innerHTML = estimatedComplexity;
         //google data array for constant plot
         var constantPlot = [['X', 'Points', 'Constant Line']];
         for(var i=1; i<=runtimeList.length; i++){
