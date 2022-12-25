@@ -1,7 +1,47 @@
-//disable the loading gif div element on page load
-document.getElementById('processing_image').setAttribute('hidden','');
-//disable the output graphs div on page load
-document.getElementById('output_graphs').setAttribute('hidden','');
+var processing_gif = document.getElementById('processing_image');
+var output_graphs = document.getElementById('output_graphs');
+var all_page_elements = document.getElementById('contents')
+
+var language_selector = document.getElementById('prog_language');
+var code_textbox = document.getElementById('code_textbox');
+var try_fibonacci_button = document.getElementById('try_fibonacci');
+var submit_button = document.getElementById('submit_button');
+var string_radio = document.getElementById('string');
+var num_radio = document.getElementById('number');
+
+var num_type_label = document.getElementById('num_types_allowed');
+var int_box = document.getElementById('int');
+var int_label = document.getElementById('int_label');
+var float_box = document.getElementById('float');
+var float_label = document.getElementById('float_label');
+
+var str_max_len_label = document.getElementById('str_max_len_label');
+var str_len_input = document.getElementById('max_len');
+var range_start_label = document.getElementById('range_start_label');
+var range_start = document.getElementById('range_start');
+var range_end_label = document.getElementById('range_end_label');
+var range_end = document.getElementById('range_end');
+
+var allowed_chars_label = document.getElementById('str_allowed_char_label');
+var lower_az_box = document.getElementById('lower_az');
+var lower_az_label = document.getElementById('lower_az_label');
+var upper_az_box = document.getElementById('upper_az');
+var upper_az_label = document.getElementById('upper_az_label');
+var num_box = document.getElementById('nums');
+var num_box_label = document.getElementById('nums_label');
+
+var br1 = document.getElementById('inter_break_1');
+var br2 = document.getElementById('inter_break_2');
+var br3 = document.getElementById('inter_break_3');
+var br4 = document.getElementById('inter_break_4');
+
+// initialising python lang vars for fibonacci button action
+var python_lang_index = -1;
+
+//hide processing gif and output graphs on page load
+processing_gif.setAttribute('hidden','');
+output_graphs.setAttribute('hidden','');
+
 //for displaying google graphs
 google.load("visualization", "1", {packages: ["corechart"]});
 function drawChart(tab, name){
@@ -48,42 +88,6 @@ function drawChart(tab, name){
         chart.draw(array, options);
     }
 }
-
-var language_selector = document.getElementById('prog_language');
-var code_textbox = document.getElementById('code_textbox');
-var try_fibonacci_button = document.getElementById('try_fibonacci');
-var submit_button = document.getElementById('submit_button');
-var string_radio = document.getElementById('string');
-var num_radio = document.getElementById('number');
-
-var num_type_label = document.getElementById('num_types_allowed');
-var int_box = document.getElementById('int');
-var int_label = document.getElementById('int_label');
-var float_box = document.getElementById('float');
-var float_label = document.getElementById('float_label');
-
-var str_max_len_label = document.getElementById('str_max_len_label');
-var str_len_input = document.getElementById('max_len');
-var range_start_label = document.getElementById('range_start_label');
-var range_start = document.getElementById('range_start');
-var range_end_label = document.getElementById('range_end_label');
-var range_end = document.getElementById('range_end');
-
-var allowed_chars_label = document.getElementById('str_allowed_char_label');
-var lower_az_box = document.getElementById('lower_az');
-var lower_az_label = document.getElementById('lower_az_label');
-var upper_az_box = document.getElementById('upper_az');
-var upper_az_label = document.getElementById('upper_az_label');
-var num_box = document.getElementById('nums');
-var num_box_label = document.getElementById('nums_label');
-
-var br1 = document.getElementById('inter_break_1');
-var br2 = document.getElementById('inter_break_2');
-var br3 = document.getElementById('inter_break_3');
-var br4 = document.getElementById('inter_break_4');
-
-// initialising python lang vars for fibonacci button action
-var python_lang_index = -1;
 
 function hide_all_sub_selections(){
     num_type_label.style.display = 'none';
