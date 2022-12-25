@@ -355,8 +355,12 @@ submit_button.onclick = function(){
         response_json['number_details'] = number_details
     }
     
-    // show processing gif
-    // document.getElementById("processing_image").removeAttribute("hidden");
+    // hide all the elements of the page
+    all_page_elements.setAttribute('hidden', '');
+    // hide the graphs
+    output_graphs.setAttribute('hidden', '');
+    // display processing gif
+    processing_gif.removeAttribute('hidden');
 
     // cors: https://stackoverflow.com/a/59353387
     fetch(BASE_URL + 'estimate_complexity', {
