@@ -43,7 +43,7 @@ processing_gif.setAttribute('hidden','');
 output_graphs.setAttribute('hidden','');
 
 //for displaying google graphs
-google.load("visualization", "1", {packages: ["corechart"]});
+google.load('visualization', '1', {packages: ['corechart']});
 function drawChart(tab, name){
     var array = google.visualization.arrayToDataTable(twoDArray=tab, opt_firstRowIsData=false);
     var options = {
@@ -221,7 +221,7 @@ try_fibonacci_button.onclick = function(){
     code_textbox.value = fibonacci_code;
     language_selector.selectedIndex = python_lang_index;
     if (python_lang_index == -1){
-        send_error(error_message="python_lang_index is -1");
+        send_error(error_message='python_lang_index is -1');
         // show error alert
         // disable submit button
         submit_button.disabled = true;
@@ -252,7 +252,7 @@ try_fibonacci_button.onclick = function(){
 submit_button.onclick = function(){
     // show an alert if there is no code
     if (code_textbox.value.length < 1){
-        alert("Plesae enter some code in the provided area");
+        alert('Plesae enter some code in the provided area');
         return;
     }
 
@@ -282,8 +282,8 @@ submit_button.onclick = function(){
         }
         
         string_details = {
-            "characters_allowed": allowed_chars_bin,
-            "max_length": parseInt(str_len_input.value)
+            'characters_allowed': allowed_chars_bin,
+            'max_length': parseInt(str_len_input.value)
         }
     }else if (num_radio.checked){
         input_type = 1
@@ -333,9 +333,9 @@ submit_button.onclick = function(){
         }
 
         number_details = {
-            "numbers_allowed": allowed_nums_bin,
-            "range_start": range_start_value,
-            "range_end": range_end_value
+            'numbers_allowed': allowed_nums_bin,
+            'range_start': range_start_value,
+            'range_end': range_end_value
         }
     }else{
         alert('Please select the type of input your code accepts');
@@ -344,15 +344,15 @@ submit_button.onclick = function(){
 
     var selected_lang = language_selector[language_selector.selectedIndex]
     var response_json = {
-        "language_id": selected_lang['value'],
-        "code": code_textbox.value,
-        "input_type": input_type
+        'language_id': selected_lang['value'],
+        'code': code_textbox.value,
+        'input_type': input_type
     }
 
     if (input_type == 0){
-        response_json["string_details"] = string_details
+        response_json['string_details'] = string_details
     }else if (input_type==1){
-        response_json["number_details"] = number_details
+        response_json['number_details'] = number_details
     }
     
     // show processing gif
@@ -369,22 +369,29 @@ submit_button.onclick = function(){
         cache: 'reload',
         body: JSON.stringify(response_json)
     }).then( (response) => { 
+        // hide the processing gif
+        processing_gif.setAttribute('hidden', '');
+        // display the page elements
+        all_page_elements.removeAttribute('hidden');
+
         // check if the POST returns a status code other than 200
         if (response.status==200){
-            // hide the processing gif
-            // document.getElementById("processing_image").setAttribute("hidden");
             return response.json()
+        }else if (false){
+
+        }else{
+
         }
     }).then((response_json) => {
         //show the results and plot the graphs
         var estimatedComplexity = response_json['estimated_complexity'];
-        var runtimeList = response_json["runtime_list"];
-        var constantModelParams = response_json["constant_model"];
-        var linearModelParams = response_json["linear_model"];
-        var logModelParams = response_json["log_model"];
-        var quasiModelParams = response_json["quasi_model"];
-        var quadModelParams = response_json["quadratic_model"];
-        var expModelParams = response_json["exponential_model"];
+        var runtimeList = response_json['runtime_list'];
+        var constantModelParams = response_json['constant_model'];
+        var linearModelParams = response_json['linear_model'];
+        var logModelParams = response_json['log_model'];
+        var quasiModelParams = response_json['quasi_model'];
+        var quadModelParams = response_json['quadratic_model'];
+        var expModelParams = response_json['exponential_model'];
         
         //constant model
         function constantModel(paramList, x) {
@@ -474,19 +481,18 @@ submit_button.onclick = function(){
         }
     
         //draw all the plots 
-        drawChart(constantPlot, "Constant");
-        drawChart(logPlot, "Logarithmic");
-        drawChart(linearPlot, "Linear");
-        drawChart(quasiPlot, "Quasilinear");
-        drawChart(quadPlot, "Quadratic");
-        drawChart(expPlot, "Exponential");
+        drawChart(constantPlot, 'Constant');
+        drawChart(logPlot, 'Logarithmic');
+        drawChart(linearPlot, 'Linear');
+        drawChart(quasiPlot, 'Quasilinear');
+        drawChart(quadPlot, 'Quadratic');
+        drawChart(expPlot, 'Exponential');
         
-        //make them visible
-        document.getElementById("output_graphs").removeAttribute("hidden");
+        // display graphs
+        output_graphs.removeAttribute('hidden');
         
         //smoothly scroll to the plotted graphs div
-        var elmntToView = document.getElementById("output_graphs");
-        elmntToView.scrollIntoView({behavior: "smooth"});
+        output_graphs.scrollIntoView({behavior: 'smooth'});
 
         // enable submit button
         submit_button.disabled = false;
