@@ -159,9 +159,10 @@ fetch(BASE_URL + 'get_active_languages', { method: 'GET'})
         submit_button.disabled = true;
         code_textbox.value = 'Hmm... There was a problem in reaching the '+
             'server. It seems the developer is cutting back on his AWS bill '+
-            ':p\nPlease send an email (check  the "Contact Developer" page) '+
-            'and this site will be back in action in no time!'
+            ':p\nPlease send an email (check the "Contact Developer" page) '+
+            'and this website will be back in action in no time!'
     })
+
 // options to show for test cases
 string_radio.onclick = function(){
     // display the sub-selections for string; hide all others
