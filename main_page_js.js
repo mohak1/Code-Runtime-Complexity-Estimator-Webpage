@@ -382,12 +382,39 @@ submit_button.onclick = function(){
         // check if the POST returns a status code other than 200
         if (response.status==200){
             return response.json()
-        }else if (false){
-
-        }else{
-
+        }else if (response.status==400){
+            alert(
+                'There was an error in processing your request. ' +
+                'Please refresh the page and submit a new request'
+            )
+            return;
+        }else if (response.status==422){
+            alert(
+                'Hmm... The compiler returned an error for at least ' +
+                'half of the test cases that were used for estimating ' +
+                'the complexity of your code. Please make sure your ' +
+                'code does not contain any errors and that you have ' +
+                'selected the correct input type for testing your code. ' +
+                'Please check the code textbox to see the ' +
+                'errors returned by your code.'
+            )
+            return response.json()
         }
     }).then((response_json) => {
+        // check if the response json has errors or complexity values
+        if ('error' in response_json){
+            // hide the processing gif
+            processing_gif.setAttribute('hidden', '');
+            // display the page elements
+            all_page_elements.removeAttribute('hidden');
+            // add the errors to the code box after the code
+            code_textbox.value = 'Your code:\n' + code_textbox.value +
+                '\n\nCompiler output:\n' + response_json['error']
+            // disable the code textbox
+            code_textbox.disabled = true;
+            return;
+        }
+
         //show the results and plot the graphs
         var estimatedComplexity = response_json['estimated_complexity'];
         var runtimeList = response_json['runtime_list'];
@@ -502,6 +529,21 @@ submit_button.onclick = function(){
         // enable submit button
         submit_button.disabled = false;
 
+
+    }).catch( rejected => {
+        alert(
+            'There was an error in estimating the complexity of your ' +
+            'code. Please make sure your code does not contain any ' +
+            'errors and that you have selected the correct input type ' +
+            'for testing your code. Please also make sure that the ' +
+            'number of test cases are more than 3'
+        )
+        // enable submit button
+        submit_button.disabled = false;
+        // hide the processing gif
+        processing_gif.setAttribute('hidden', '');
+        // display the page elements
+        all_page_elements.removeAttribute('hidden');
     });
 };
 
