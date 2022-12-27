@@ -48,7 +48,7 @@ function drawChart(tab, name){
     var array = google.visualization.arrayToDataTable(twoDArray=tab, opt_firstRowIsData=false);
     var options = {
         title: name+' Function',
-        'width':900,
+        'width':680,
         'height':500,
         legend: 'none',
         interpolateNulls: true,
