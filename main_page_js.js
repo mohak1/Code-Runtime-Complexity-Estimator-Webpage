@@ -424,7 +424,7 @@ submit_button.onclick = function(){
         var quasiModelParams = response_json['quasi_model'];
         var quadModelParams = response_json['quadratic_model'];
         var expModelParams = response_json['exponential_model'];
-        
+
         //constant model
         function constantModel(paramList, x) {
             a = paramList[0];
@@ -471,7 +471,7 @@ submit_button.onclick = function(){
             var newRow = [i, runtimeList[i-1], constantModelValue];
             constantPlot.push(newRow);
         }
-        
+
         //google data array for log plot
         var logPlot = [['X', 'Points', 'Logarithmic Curve']];
         for(var i=1; i<=runtimeList.length; i++){
@@ -479,7 +479,7 @@ submit_button.onclick = function(){
             var newRow = [i, runtimeList[i-1], logModelValue];
             logPlot.push(newRow);
         }
-        
+
         //google data array for linear plot
         var linearPlot = [['X', 'Points', 'Linear Line']];
         for(var i=1; i<=runtimeList.length; i++){
@@ -487,7 +487,7 @@ submit_button.onclick = function(){
             var newRow = [i, runtimeList[i-1], linearModelValue];
             linearPlot.push(newRow);
         }
-        
+
         //google data array for quasilinear plot
         var quasiPlot = [['X', 'Points', 'Quasilinear Curve']];
         for(var i=1; i<=runtimeList.length; i++){
@@ -495,7 +495,7 @@ submit_button.onclick = function(){
             var newRow = [i, runtimeList[i-1], quasiModelValue];
             quasiPlot.push(newRow);
         }
-        
+
         //google data array for quadratic plot
         var quadPlot = [['X', 'Points', 'Quadratic Curve']];
         for(var i=1; i<=runtimeList.length; i++){
@@ -503,7 +503,7 @@ submit_button.onclick = function(){
             var newRow = [i, runtimeList[i-1], quadModelValue];
             quadPlot.push(newRow);
         }
-        
+
         //google data array for exponential plot
         var expPlot = [['X', 'Points', 'Exponential Curve']];
         for(var i=1; i<=runtimeList.length; i++){
@@ -511,7 +511,7 @@ submit_button.onclick = function(){
             var newRow = [i, runtimeList[i-1], expModelValue];
             expPlot.push(newRow);
         }
-    
+
         //draw all the plots 
         drawChart(constantPlot, 'Constant');
         drawChart(logPlot, 'Logarithmic');
@@ -519,10 +519,10 @@ submit_button.onclick = function(){
         drawChart(quasiPlot, 'Quasilinear');
         drawChart(quadPlot, 'Quadratic');
         drawChart(expPlot, 'Exponential');
-        
+
         // display graphs
         output_graphs.removeAttribute('hidden');
-        
+
         //smoothly scroll to the plotted graphs div
         output_graphs.scrollIntoView({behavior: 'smooth'});
 
