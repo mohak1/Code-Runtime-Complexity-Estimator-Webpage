@@ -27,18 +27,18 @@
         <script defer src='main_page_js.js'></script>
 
         <div id='contents'>
-            <h3>
+            <h4>
                 <div class='navbar'>
                     <a id='Home' href='index.html'>Home</a> |
                     <a id='About' href='about.html'>About</a> |
                     <a id='Contact Developer' href='contact_developer.html'>Contact Developer</a>
                 </div>
-            </h3>
-            <h1>Welcome to Code Runtime Complexity Estimator</h1>
+            </h4>
+            <h2>Welcome to Code Runtime Complexity Estimator</h2>
 
             <form>
             <h4>Don't have a snippet of code to test right now?  No problem!</h4>
-            <button type='button' id='try_fibonacci' style="height:40px;width:200px">
+            <button type='button' id='try_fibonacci' style="height:25px;width:200px">
                 Try Recursive Fibonacci
             </button>
             <br><br>
@@ -46,17 +46,15 @@
             <select id='prog_language'></select>
             </form>
 
-            <h1>Your code here:</h1>
-            <textarea id='code_textbox' rows=20 cols=100 
+            <h3>Your code here:</h3>
+            <textarea id='code_textbox' rows=20 cols=80 
                 placeholder='Here goes your code...'></textarea>
-            <br><br>
-            <h2>Select the type of inputs your code expects:</h2>
+            <br>
+            <h4>Select the type of inputs your code expects:</h4>
             <input type='radio' name='input_type' id='string'>
                 <label for='string' id='string_label'>String</label>
             <input type='radio' name='input_type' id='number'>
                 <label for='number' id='number_label'>Number</label>
-            <!-- <input type='radio' name='input_type' id='array'>
-                <label for='array' id='array_label'>Array/List</label> -->
             <br><br>
             <label id='num_types_allowed'>
                 Numeric values allowed:
@@ -89,7 +87,7 @@
             <input type='text' id='range_end' size='5' value='500'>
 
             <br><br>
-            <button id='submit_button' size='10' style="height:40px;width:200px">
+            <button id='submit_button' size='10' style="height:30px;width:150px">
                 Submit
             </button>
 
@@ -103,31 +101,33 @@
     
         <!-- div for showing results and graphs -->
         <div id='output_graphs'>
-            <h3 style='text-align:center;'>The approximate runtime complexity of your code based on the provided inputs is:</h3>
+            <h3 style='text-align:center;'>
+                The approximate runtime complexity of your code based on the provided inputs is:
+            </h3>
             <h2 style='text-align:center;'><div id='final_complexity'></div></h2>
-            <table>
+            <table align="left">
                 <tr>
                     <td>
-                        <div id='divConstant' style='width: 900px; height: 500px;'></div>
+                        <div id='divConstant'></div>
                     </td>
                     <td>
-                        <div id='divLogarithmic' style='width: 100%; height: 100%;'></div>
+                        <div id='divLogarithmic'></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div id='divLinear' style='width: 900px; height: 500px;'></div>
+                        <div id='divLinear'></div>
                     </td>
                     <td>
-                        <div id='divQuasi' style='width: 900px; height: 500px;'></div>
+                        <div id='divQuasi'></div>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <div id='divQuadratic' style='width: 900px; height: 500px;'></div>
+                        <div id='divQuadratic'></div>
                     </td>
                     <td>
-                        <div id='divExponential' style='width: 900px; height: 500px;'></div>
+                        <div id='divExponential'></div>
                     </td>
                 </tr>
             </table>
